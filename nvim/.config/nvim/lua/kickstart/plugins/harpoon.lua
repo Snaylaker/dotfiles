@@ -5,7 +5,7 @@ harpoon:setup()
 -- REQUIRED
 
 -- Add file to Harpoon list
-vim.keymap.set('n', '•', function() harpoon:list():append() end)
+vim.keymap.set('n', '•', function() harpoon:list():add() end)
 
 -- Toggle Harpoon quick menu
 vim.keymap.set('n', '<leader>h', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)

@@ -101,7 +101,6 @@ vim.opt.relativenumber = true
 vim.opt.incsearch = true
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
-vim.g.webdevicons_conceal_nerdtree_brackets = 1
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
@@ -245,12 +244,14 @@ require("lazy").setup({
         delete = { text = "_" },
         topdelete = { text = "‾" },
         changedelete = { text = "~" },
-        --on_attach = function(bufnr)
-        --vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
-        --{ buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-        --vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-        --vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
-        --end,
+        on_attach = function(bufnr)
+          -- vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
+          --   { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
+          -- vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk,
+          --   { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
+          vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk,
+            { buffer = bufnr, desc = '[P]review [H]unk' })
+        end,
       },
     },
   },
@@ -351,7 +352,13 @@ require("lazy").setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          find_files = {
+            path_display = {
+              "filename_first",
+            }
+          }
+        },
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown(),
@@ -792,12 +799,13 @@ require("lazy").setup({
     end,
   },
   {
-    "catppuccin/nvim",
+    'folke/tokyonight.nvim',
     lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- Load the colorscheme here
-      vim.cmd.colorscheme("catppuccin")
+      -- vim.cmd.colorscheme("catppuccin")
+      vim.cmd.colorscheme("tokyonight-night")
       -- You can configure highlights by doing something like
       vim.cmd.hi("Comment gui=none")
     end,
