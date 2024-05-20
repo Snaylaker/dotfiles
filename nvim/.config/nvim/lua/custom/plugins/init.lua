@@ -4,6 +4,8 @@
 -- See the kickstart.nvim README for more information
 return {
 	'wuelnerdotexe/vim-astro',
+	
+
 	{
 		'folke/trouble.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
