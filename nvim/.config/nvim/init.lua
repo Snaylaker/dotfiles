@@ -672,7 +672,8 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        javascript = { { 'prettierd', 'prettier' } },
+        typescript = { { 'prettierd', 'prettier' } },
       },
     },
   },
@@ -926,7 +927,6 @@ require('lazy').setup({
 vim.keymap.set('n', '<leader>ga', ':G <CR>', { noremap = true, silent = true, desc = '[G]it menu' })
 vim.keymap.set('n', '<leader>gp', ':G push <CR>', { noremap = true, silent = true, desc = '[G]it [P]ush' })
 vim.keymap.set('n', '<leader>zz', ':ZenMode<CR>', { noremap = true, silent = true, desc = '[Z]en mode' })
-
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>', { noremap = true, silent = true, desc = '[F]ind Tmux Session' })
 
 vim.keymap.set('n', '<leader>Ee', ':NERDTreeToggle<CR>', { noremap = true, silent = true, desc = '[E]xplore' })
@@ -937,5 +937,23 @@ require 'kickstart.plugins.docs'
 require 'kickstart.plugins.harpoon'
 require 'kickstart.plugins.trouble'
 
+local lspconfig = require 'lspconfig'
+
+-- Configure Tailwind CSS Language Server
+lspconfig.tailwindcss.setup {
+  filetypes = { 'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte' },
+  root_dir = lspconfig.util.root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', '.git'),
+}
+
+-- Configure HTMX Language Server
+lspconfig.htmx.setup {
+  filetypes = { 'html', 'templ' },
+  root_dir = lspconfig.util.root_pattern('.git', 'index.html'),
+}
+
+-- Configure HTML Language Server
+lspconfig.html.setup {
+  filetypes = { 'html', 'templ' },
+}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et- vim: ts=2 sts=2 sw=2 et
