@@ -936,6 +936,8 @@ vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 require 'kickstart.plugins.docs'
 require 'kickstart.plugins.harpoon'
 require 'kickstart.plugins.trouble'
-
+local lspconfig = require 'lspconfig'
+lspconfig.htmx.setup {}
+lspconfig.tailwindcss.setup {}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et- vim: ts=2 sts=2 sw=2 et
