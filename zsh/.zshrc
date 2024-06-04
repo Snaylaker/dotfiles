@@ -97,7 +97,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias startvpn="sudo openvpn --config /etc/openvpn/gcp.conf"
 # pnpm
 export PNPM_HOME="/Users/mhimmid/Library/pnpm"
 case ":$PATH:" in
