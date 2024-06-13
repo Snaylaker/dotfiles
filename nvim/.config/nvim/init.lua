@@ -672,6 +672,7 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
+        typescriptreact = { 'tailwindcss-language-server', 'prettierd' },
         javascript = { { 'prettierd', 'prettier' } },
         typescript = { { 'prettierd', 'prettier' } },
       },
@@ -933,6 +934,7 @@ vim.keymap.set('n', '<leader>Ee', ':NERDTreeToggle<CR>', { noremap = true, silen
 vim.keymap.set('n', '<leader>Ec', ':NERDTree %<CR>', { noremap = true, silent = true, desc = '[E]xplore [C]urrent buffer directory' })
 
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+
 require 'kickstart.plugins.docs'
 require 'kickstart.plugins.harpoon'
 require 'kickstart.plugins.trouble'
