@@ -124,8 +124,24 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Determine the operating system
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    ZSH_SYNTAX_HIGHLIGHTING="/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+else 
+    ZSH_SYNTAX_HIGHLIGHTING="/home/mehdi/personal/dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
+# Source the plugin if the file exists
+if [[ -f "$ZSH_SYNTAX_HIGHLIGHTING" ]]; then
+    source "$ZSH_SYNTAX_HIGHLIGHTING"
+else
+    echo "zsh-syntax-highlighting plugin not found"
+fi
 
 bindkey -s ^f "tmux-sessionizer\n"
 
-export PATH=$PATH:$(go env GOPATH)/bin
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export PATH=$PATH:$(go env GOPATH)/bin
+else 
+    export PATH=$PATH:/usr/local/go/bin
+fi

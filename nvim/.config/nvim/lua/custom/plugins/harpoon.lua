@@ -7,7 +7,7 @@ return {
     harpoon:setup()
 
     -- Toggle Harpoon quick menu
-    vim.keymap.set('n', '<leader>h', function()
+    vim.keymap.set('n', '<leader>H', function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
     end)
 
@@ -21,7 +21,7 @@ return {
       addFileShortcut = '•'
     elseif vim.loop.os_uname().sysname == 'Linux' then
       fileNavigationShortcuts = { '<ctrl>1', '<ctrl>2', '<ctrl>3', '<ctrl>4' }
-      addFileShortcut = ''
+      addFileShortcut = '<C-²>'
     end
 
     vim.keymap.set('n', addFileShortcut, function()
