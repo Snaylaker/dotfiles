@@ -100,6 +100,7 @@ vim.g.have_nerd_font = true
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
+--
 
 -- Make line numbers default
 vim.opt.number = true
@@ -423,6 +424,13 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+      vim.keymap.set('n', '<leader>sc', function()
+        builtin.find_files {
+          cwd = '~/personal/dotfiles/',
+          hidden = true,
+          file_ignore_patterns = { '.git/', 'tmux/.config/tmux/plugins/', 'zsh/zsh-syntax-highlighting/' },
+        }
+      end, { desc = '[S]earch [C]onfiguration ' })
     end,
   },
 
