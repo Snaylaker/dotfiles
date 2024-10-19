@@ -1,13 +1,10 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
-
--- This will hold the configuration.
+local mux = wezterm.mux
 local config = wezterm.config_builder()
+
 config.hide_tab_bar_if_only_one_tab = true
-
 config.window_decorations = 'RESIZE'
-
--- For example, changing the color scheme:
 config.color_scheme = 'tokyonight'
 config.font_size = 16
 config.window_padding = {
@@ -16,5 +13,10 @@ config.window_padding = {
   top = 0,
   bottom = 0,
 }
+
+wezterm.on('gui-startup', function()
+  local window = mux.spawn_window {}
+  window:gui_window():maximize()
+end)
 
 return config
