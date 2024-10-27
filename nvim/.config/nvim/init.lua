@@ -416,7 +416,7 @@ require('lazy').setup({
       end, { desc = '[S]earch [N]eovim files' })
       vim.keymap.set('n', '<leader>sc', function()
         builtin.find_files {
-          cwd = '~/personal/dotfiles/',
+          cwd = '~/Personal/dotfiles/',
           hidden = true,
           file_ignore_patterns = { '.git/', 'tmux/.config/tmux/plugins/', 'zsh/zsh-syntax-highlighting/' },
         }
