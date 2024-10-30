@@ -6,7 +6,7 @@ local config = wezterm.config_builder()
 config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = 'RESIZE'
 config.color_scheme = 'tokyonight'
-config.font_size = 16
+config.font_size = 20
 config.window_padding = {
   left = 0,
   right = 0,
@@ -14,7 +14,7 @@ config.window_padding = {
   bottom = 0,
 }
 wezterm.on('gui-startup', function(cmd)
-  local tab, pane, window = mux.spawn_window(cmd or {})
+  local window = mux.spawn_window(cmd or {})
   window:gui_window():maximize()
 end)
 return config

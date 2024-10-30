@@ -109,9 +109,4 @@ bindkey -s ^f "tmux-sessionizer\n"
 
 export GOPATH=$HOME/go
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    export PATH=$PATH:$(go env GOPATH)/bin
-else 
-    export PATH=$PATH:/usr/local/go/bin
-fi
 export PATH=$PATH:$HOME/go/bin
