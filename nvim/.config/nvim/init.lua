@@ -106,6 +106,9 @@ vim.g.have_nerd_font = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.incsearch = true
+vim.opt.breakindent = true
+vim.opt.linebreak = true
+vim.opt.wrap = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -946,5 +949,20 @@ require('lazy').setup({
   },
 })
 
+local lspconfig = require 'lspconfig'
+lspconfig.mdx_analyzer.setup {
+  filetypes = { 'mdx' },
+}
+vim.filetype.add {
+  extension = {
+    mdx = 'markdown',
+  },
+}
+
+-- Configure Tailwind CSS Language Server
+lspconfig.tailwindcss.setup {
+  filetypes = { 'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte' },
+  root_dir = lspconfig.util.root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', '.git'),
+}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
