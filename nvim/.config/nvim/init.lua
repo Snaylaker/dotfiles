@@ -699,6 +699,7 @@ require('lazy').setup({
         yaml = { 'prettierd' },
         typescriptreact = { 'tailwindcss-language-server' },
         graphql = { 'prettierd' },
+        html = { 'prettierd' },
         javascript = { { 'prettierd' } },
         typescript = { { 'prettierd' } },
       },
