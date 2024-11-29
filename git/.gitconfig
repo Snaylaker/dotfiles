@@ -1,6 +1,5 @@
 [user]
 	name = Snaylaker 
-[includeIf "gitdir:~/Personal/**"]
 	email = me@private.ma
 [alias]
 	st = status
@@ -14,7 +13,7 @@
 [push]
 	autoSetupRemote = true
 [color]
-    ui = auto
+	ui = auto
 [rerere]
 	enabled = true
 [branch]
