@@ -24,6 +24,7 @@
 [maintenance]
 	auto = true
 	strategy = incremental
+	repo = /Users/mhimmid/Work/mytf1-web-front
 [rebase]
 	updateRefs = true
 [diff]
