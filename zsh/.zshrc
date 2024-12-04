@@ -105,10 +105,12 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-export HISTTIMEFORMAT="%F %T "
 bindkey -s ^f "tmux-sessionizer\n"
- export GOPATH=$HOME/go
- export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+bindkey -s ƒ "tmux-sessionizer\n"
+
+export HISTTIMEFORMAT="%F %T "
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
