@@ -9,7 +9,7 @@ config.use_ime = false
 config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = 'RESIZE'
 config.color_scheme = 'tokyonight'
-config.font_size = 20
+config.line_height = 1.2
 config.check_for_updates = true
 config.check_for_updates_interval_seconds = 86400
 

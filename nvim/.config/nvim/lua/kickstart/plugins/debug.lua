@@ -12,6 +12,7 @@ return {
   -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
+    'nvim-neotest/nvim-nio',
     'rcarriga/nvim-dap-ui',
 
     -- Installs the debug adapters for you
@@ -20,10 +21,13 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mfussenegger/nvim-dap-python',
   },
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+
+    require('dap-python').setup 'uv'
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
@@ -39,6 +43,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'debugpy', -- Add this line
       },
     }
 
