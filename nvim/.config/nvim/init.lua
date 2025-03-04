@@ -662,7 +662,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         gopls = {},
-        -- pyright = {},
+        ruff = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -759,7 +759,7 @@ require('lazy').setup({
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         yaml = { 'prettierd' },
-        python = { 'prettierd' },
+        python = { 'black' },
         typescriptreact = { 'prettierd', 'rustywind' },
         graphql = { 'prettierd' },
         html = { 'prettierd' },
