@@ -8,8 +8,6 @@
 	editor = nvim
 [fetch]
 	prune = true
-[merge]
-	conflictstyle = diff3
 [push]
 	autoSetupRemote = true
 [color]
