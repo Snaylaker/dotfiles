@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=() 
+plugins=(zsh-autosuggestions zsh-syntax-highlighting) 
 
 source $ZSH/oh-my-zsh.sh
 
@@ -119,3 +119,5 @@ export NVM_DIR="$HOME/.nvm"
 
 export PAGER='nvim +Man!'
 alias vim='nvim'
+alias clear="echo use Ctrl-L to clear the screen"
+eval "$(starship init zsh)"

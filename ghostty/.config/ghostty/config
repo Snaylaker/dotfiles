@@ -1,4 +1,6 @@
 font-family = "Berkeley Mono"
 font-size = 18
-theme = "tokyonight_night"
-window-decoration="none"
+window-width = 9999
+window-height = 9999
+theme = dark:rose-pine-moon,light:rose-pine-dawn
+window-decoration = none
