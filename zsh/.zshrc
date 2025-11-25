@@ -112,12 +112,19 @@ export HISTTIMEFORMAT="%F %T "
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
 export PAGER='nvim +Man!'
 alias vim='nvim'
 alias clear="echo use Ctrl-L to clear the screen"
+alias code="opencode"
 eval "$(starship init zsh)"
+
+
+export PATH="/opt/homebrew/bin:$PATH"
+# opencode
+export PATH=/Users/mhimmid/.opencode/bin:$PATH
+

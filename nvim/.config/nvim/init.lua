@@ -85,8 +85,8 @@ P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 --
 -- vim.g.loaded_python3_provider = 0
-vim.g.loaded_ruby_provider = 0
-vim.g.loaded_perl_provider = 0
+-- vim.g.loaded_ruby_provider = 0
+-- vim.g.loaded_perl_provider = 0
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -709,9 +709,6 @@ require('lazy').setup({
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,
@@ -892,17 +889,26 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'rose-pine/neovim',
-    name = 'rose-pine',
+    'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
-      require('rose-pine').setup {
-        variant = 'moon', -- auto, main, moon, or dawn
+      require('tokyonight').setup {
+        style = 'night',
+        transparent = true,
+        styles = {
+          sidebars = 'transparent',
+          floats = 'transparent',
+        },
       }
-      vim.cmd.colorscheme 'rose-pine'
+      vim.cmd.colorscheme 'tokyonight-night'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
+
+      -- Make background transparent
+      vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+      vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+      vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none' })
     end,
   },
 
@@ -922,10 +928,10 @@ require('lazy').setup({
       --
       -- -- Add/delete/replace surroundings (brackets, quotes, etc.)
       -- --
-      -- -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- -- - sd'   - [S]urround [D]elete [']quotes
-      -- -- - sr)'  - [S]urround [R]eplace [)] [']
-      -- require('mini.surround').setup()
+      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+      -- - sd'   - [S]urround [D]elete [']quotes
+      -- - sr)'  - [S]urround [R]eplace [)] [']
+      require('mini.surround').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -981,7 +987,7 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  require 'kickstart.plugins.debug',
+  -- require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indentline',
   require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
@@ -1001,16 +1007,6 @@ require('lazy').setup({
     icons = {},
   },
 })
-
-local lspconfig = require 'lspconfig'
-lspconfig.mdx_analyzer.setup {
-  filetypes = { 'mdx' },
-}
-vim.filetype.add {
-  extension = {
-    mdx = 'markdown',
-  },
-}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
