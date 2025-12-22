@@ -38,4 +38,4 @@ SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/Users/mhimmid/\x2eopencode/bin\x1e/Users/mhimmid/go/bin\x1e/usr/local/go/bin\x1e/Users/mhimmid/Library/pnpm\x1e/opt/homebrew/bin
+SETUVAR fish_user_paths:/opt/homebrew/opt/openjdk/bin\x1e/Users/mhimmid/\x2eopencode/bin\x1e/Users/mhimmid/go/bin\x1e/usr/local/go/bin\x1e/Users/mhimmid/Library/pnpm\x1e/opt/homebrew/bin
