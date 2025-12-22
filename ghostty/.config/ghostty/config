@@ -1,6 +1,10 @@
-font-family = "Berkeley Mono"
 font-size = 18
-window-width = 9999
-window-height = 9999
-theme = dark:rose pine moon ,light:rose pine dawn
+maximize = true
+window-padding-balance = true
+window-padding-x = 0
+window-padding-y = 0
+theme=tokyoNight
 window-decoration = none
+background-blur = macos-glass-regular
+background-opacity = 0.7
+auto-update-channel = tip
