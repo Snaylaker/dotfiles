@@ -1,0 +1,24 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+
+[user]
+name = "Snaylaker"
+email = "mehdihimmid73@gmail.com"
+
+[[--scope]]
+--when.repositories = ["~/work"]
+[--scope.user]
+email = "mhimmid@tf1.fr"
+
+[ui]
+pager = "cat"
+editor = "nvim"
+log-reversed = true
+merge-editor = "nvim"
+default-command = ["status"]
+
+[revsets]
+log = "(trunk()..@):: | (trunk()..@)-"
+
+[aliases]
+l = ["log", "--reversed", "--limit", "10"]
+myl = ["log", "--reversed", "--limit", "10", "-r"," mine() & bookmarks()"]
