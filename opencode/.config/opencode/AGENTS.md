@@ -1,0 +1,5 @@
+- Make plans extremely concise. Sacrifice grammar for concision.
+- End each plan with a list of unresolved questions, if any.
+- use gh cli to interact with github
+- Always use the question tool when you need input from the user
+- Never add comments to code unless explicitly requested by the user
