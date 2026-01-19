@@ -1,8 +1,8 @@
 font-size = 18
 maximize = true
 window-padding-balance = true
-window-padding-x = 0
-window-padding-y = 0
+window-padding-x = 10
+window-padding-y = 10
 theme=tokyoNight
 window-decoration = none
 background-blur = macos-glass-regular
