@@ -8,6 +8,7 @@ fish_add_path $PNPM_HOME
 fish_add_path /usr/local/go/bin
 fish_add_path $GOPATH/bin
 fish_add_path /Users/mhimmid/.opencode/bin
+fish_add_path /Users/mhimmid/.local/zig
 
 # Aliases
 alias vim='nvim'
