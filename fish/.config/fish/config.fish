@@ -12,18 +12,10 @@ fish_add_path /Users/mhimmid/.local/zig
 
 # Aliases
 alias vim='nvim'
-alias code="opencode"
+alias c="opencode"
 
 # Key bindings
 bind \cf /usr/local/bin/tmux-sessionizer
-
-# In ~/.config/fish/config.fish
-function jjd
-    read -P "Type (feat/fix/docs/refactor/chore): " type
-    read -P "Subject: " subject
-    read -P "Ticket number: " ticket
-    jj describe -m "$type: $subject REF-$ticket"
-end
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
