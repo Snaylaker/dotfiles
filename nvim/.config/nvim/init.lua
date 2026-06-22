@@ -1088,6 +1088,43 @@ do
   vim.keymap.set('n', '<C-l>', '<cmd><C-U>TmuxNavigateRight<cr>')
   vim.keymap.set('n', '<C-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>')
 
+  local harpoon_path = vim.fn.stdpath 'data' .. '/harpoon2'
+  if not vim.uv.fs_stat(harpoon_path) then
+    vim.fn.system {
+      'git',
+      'clone',
+      '--branch=harpoon2',
+      '--single-branch',
+      'https://github.com/ThePrimeagen/harpoon.git',
+      harpoon_path,
+    }
+  end
+  vim.opt.rtp:prepend(harpoon_path)
+
+  local harpoon = require 'harpoon'
+  harpoon:setup()
+  vim.keymap.set('n', '<leader>H', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+  local uname = (vim.uv or vim.loop).os_uname().sysname
+  local file_navigation_shortcuts = nil
+  local add_file_shortcut = nil
+  if uname == 'Darwin' then
+    file_navigation_shortcuts = { '', 'ë', '“', '‘' }
+    add_file_shortcut = '•'
+  elseif uname == 'Linux' then
+    file_navigation_shortcuts = { '<ctrl>1', '<ctrl>2', '<ctrl>3', '<ctrl>4' }
+    add_file_shortcut = '<C-²>'
+  end
+
+  if add_file_shortcut then
+    vim.keymap.set('n', add_file_shortcut, function() harpoon:list():add() end)
+  end
+  if file_navigation_shortcuts then
+    for i, key in ipairs(file_navigation_shortcuts) do
+      vim.keymap.set('n', key, function() harpoon:list():select(i) end)
+    end
+  end
+
   require 'custom.goth'
 end
 
