@@ -1025,13 +1025,20 @@ do
     gh 'dmmulroy/ts-error-translator.nvim',
     gh 'mbbill/undotree',
     gh 'folke/zen-mode.nvim',
+    { src = gh 'ThePrimeagen/harpoon', version = 'harpoon2' },
   }
 
+  local map = function(mode, lhs, rhs, desc, opts)
+    opts = opts or {}
+    opts.desc = desc
+    vim.keymap.set(mode, lhs, rhs, opts)
+  end
+
+  -- Extra plugin setup
   require('oil').setup {
     default_file_explorer = true,
     view_options = { show_hidden = true },
   }
-
   require('dressing').setup {}
   require('trouble').setup {}
   require('noice').setup {
@@ -1073,41 +1080,28 @@ do
     },
   }
 
-  vim.keymap.set('n', '<leader>lg', '<cmd>LazyGit<CR>', { desc = 'LazyGit' })
-  vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Toggle [U]ndotree' })
-  vim.keymap.set('n', '<leader>zz', ':ZenMode<CR>', { noremap = true, silent = true, desc = '[Z]en mode' })
-  vim.keymap.set('n', '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', { desc = 'Diagnostics (Trouble)' })
-  vim.keymap.set('n', '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', { desc = 'Buffer Diagnostics (Trouble)' })
-  vim.keymap.set('n', '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>', { desc = 'Symbols (Trouble)' })
-  vim.keymap.set('n', '<leader>cl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>', { desc = 'LSP Definitions / references / ... (Trouble)' })
-  vim.keymap.set('n', '<leader>xL', '<cmd>Trouble loclist toggle<cr>', { desc = 'Location List (Trouble)' })
-  vim.keymap.set('n', '<leader>xQ', '<cmd>Trouble qflist toggle<cr>', { desc = 'Quickfix List (Trouble)' })
-  vim.keymap.set('n', '<C-h>', '<cmd><C-U>TmuxNavigateLeft<cr>')
-  vim.keymap.set('n', '<C-j>', '<cmd><C-U>TmuxNavigateDown<cr>')
-  vim.keymap.set('n', '<C-k>', '<cmd><C-U>TmuxNavigateUp<cr>')
-  vim.keymap.set('n', '<C-l>', '<cmd><C-U>TmuxNavigateRight<cr>')
-  vim.keymap.set('n', '<C-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>')
-
-  local harpoon_path = vim.fn.stdpath 'data' .. '/harpoon2'
-  if not vim.uv.fs_stat(harpoon_path) then
-    vim.fn.system {
-      'git',
-      'clone',
-      '--branch=harpoon2',
-      '--single-branch',
-      'https://github.com/ThePrimeagen/harpoon.git',
-      harpoon_path,
-    }
-  end
-  vim.opt.rtp:prepend(harpoon_path)
+  -- Extra keymaps
+  map('n', '<leader>lg', '<cmd>LazyGit<CR>', 'LazyGit')
+  map('n', '<leader>u', vim.cmd.UndotreeToggle, 'Toggle [U]ndotree')
+  map('n', '<leader>zz', ':ZenMode<CR>', '[Z]en mode', { noremap = true, silent = true })
+  map('n', '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', 'Diagnostics (Trouble)')
+  map('n', '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', 'Buffer Diagnostics (Trouble)')
+  map('n', '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>', 'Symbols (Trouble)')
+  map('n', '<leader>cl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>', 'LSP Definitions / references / ... (Trouble)')
+  map('n', '<leader>xL', '<cmd>Trouble loclist toggle<cr>', 'Location List (Trouble)')
+  map('n', '<leader>xQ', '<cmd>Trouble qflist toggle<cr>', 'Quickfix List (Trouble)')
+  map('n', '<C-h>', '<cmd><C-U>TmuxNavigateLeft<cr>', 'Tmux left')
+  map('n', '<C-j>', '<cmd><C-U>TmuxNavigateDown<cr>', 'Tmux down')
+  map('n', '<C-k>', '<cmd><C-U>TmuxNavigateUp<cr>', 'Tmux up')
+  map('n', '<C-l>', '<cmd><C-U>TmuxNavigateRight<cr>', 'Tmux right')
+  map('n', '<C-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>', 'Tmux previous')
 
   local harpoon = require 'harpoon'
   harpoon:setup()
-  vim.keymap.set('n', '<leader>H', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+  map('n', '<leader>H', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, 'Harpoon menu')
 
   local uname = (vim.uv or vim.loop).os_uname().sysname
-  local file_navigation_shortcuts = nil
-  local add_file_shortcut = nil
+  local file_navigation_shortcuts, add_file_shortcut
   if uname == 'Darwin' then
     file_navigation_shortcuts = { '', 'ë', '“', '‘' }
     add_file_shortcut = '•'
@@ -1117,14 +1111,15 @@ do
   end
 
   if add_file_shortcut then
-    vim.keymap.set('n', add_file_shortcut, function() harpoon:list():add() end)
+    map('n', add_file_shortcut, function() harpoon:list():add() end, 'Harpoon add file')
   end
   if file_navigation_shortcuts then
     for i, key in ipairs(file_navigation_shortcuts) do
-      vim.keymap.set('n', key, function() harpoon:list():select(i) end)
+      map('n', key, function() harpoon:list():select(i) end, 'Harpoon file ' .. i)
     end
   end
 
+  -- Extra LSP overrides
   require 'custom.goth'
 end
 

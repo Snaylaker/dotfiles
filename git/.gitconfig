@@ -6,7 +6,7 @@
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 [core]
 	editor = nvim
-	excludesfile = /Users/mhimmid/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [fetch]
 	prune = true
 [push]
@@ -23,7 +23,6 @@
 [maintenance]
 	auto = true
 	strategy = incremental
-	repo = /Users/mhimmid/Work/mytf1-web-front
 [rebase]
 	updateRefs = true
 [diff]

@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+
+# Editor / tooling state
+.claude/
+
+# Package manager artifacts
+**/node_modules/
+opencode/.config/opencode/package-lock.json
+
+# Shell state
+fish/.config/fish/fish_variables
+
+# SSH machine state
+ssh/.ssh/known_hosts
+
+# JJ local repo metadata
+jj/.config/jj/repos/
+
+# Tmux installed plugins
+tmux/.config/tmux/plugins/
+
+# Neovim generated docs
+nvim/.config/nvim/doc/tags
