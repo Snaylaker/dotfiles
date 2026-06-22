@@ -1,18 +1,36 @@
-local lspconfig = require 'lspconfig'
-
 -- Configure Tailwind CSS Language Server
-lspconfig.tailwindcss.setup {
+vim.lsp.config('tailwindcss', {
   filetypes = { 'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte' },
-  root_dir = lspconfig.util.root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', '.git'),
-}
+  root_dir = function(bufnr, on_dir)
+    local root = vim.fs.root(bufnr, {
+      'tailwind.config.js',
+      'tailwind.config.ts',
+      'postcss.config.js',
+      'postcss.config.ts',
+      'package.json',
+      '.git',
+    })
+    if root then
+      on_dir(root)
+    end
+  end,
+})
+vim.lsp.enable('tailwindcss')
 
 -- Configure HTMX Language Server
-lspconfig.htmx.setup {
+vim.lsp.config('htmx', {
   filetypes = { 'html', 'templ' },
-  root_dir = lspconfig.util.root_pattern('.git', 'index.html'),
-}
+  root_dir = function(bufnr, on_dir)
+    local root = vim.fs.root(bufnr, { '.git', 'index.html' })
+    if root then
+      on_dir(root)
+    end
+  end,
+})
+vim.lsp.enable('htmx')
 
 -- Configure HTML Language Server
-lspconfig.html.setup {
+vim.lsp.config('html', {
   filetypes = { 'html', 'templ' },
-}
+})
+vim.lsp.enable('html')

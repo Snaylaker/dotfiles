@@ -690,6 +690,46 @@ require("lazy").setup({
 				graphql = {
 					filetypes = { "graphql" }, -- only graphql files
 				},
+				elixirls = {
+					cmd = { "elixir-ls" },
+					filetypes = { "elixir", "eelixir", "heex", "surface" },
+					-- Only start ElixirLS inside real Mix projects. Without this, opening
+					-- standalone .ex files at the repo root can spawn a rootless ElixirLS
+					-- client, then opening kv/ files spawns another one.
+					root_dir = function(bufnr, on_dir)
+						local root = vim.fs.root(bufnr, "mix.exs")
+						if root then
+							on_dir(root)
+						end
+					end,
+				},
+				tailwindcss = {
+					-- Keep Tailwind from attaching to plain Elixir files. The default
+					-- lspconfig filetypes include elixir/eelixir/heex for Phoenix apps,
+					-- which made it attach in this learning repo unnecessarily.
+					filetypes = {
+						"html",
+						"css",
+						"javascript",
+						"javascriptreact",
+						"typescript",
+						"typescriptreact",
+						"vue",
+						"svelte",
+					},
+					root_dir = function(bufnr, on_dir)
+						local root = vim.fs.root(bufnr, {
+							"tailwind.config.js",
+							"tailwind.config.ts",
+							"postcss.config.js",
+							"postcss.config.ts",
+							"package.json",
+						})
+						if root then
+							on_dir(root)
+						end
+					end,
+				},
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},
@@ -719,7 +759,6 @@ require("lazy").setup({
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format lua code
 				"prettierd",
-				"tailwindcss-language-server",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -983,9 +1022,23 @@ require("lazy").setup({
 		config = function()
 			require("nvim-treesitter").setup({})
 			require("nvim-treesitter").install({
-				"bash", "c", "diff", "html", "lua", "luadoc",
-				"markdown", "markdown_inline", "query", "vim", "vimdoc",
-				"ruby", "typescript", "javascript", "tsx", "json", "yaml",
+				"bash",
+				"c",
+				"diff",
+				"html",
+				"lua",
+				"luadoc",
+				"markdown",
+				"markdown_inline",
+				"query",
+				"vim",
+				"vimdoc",
+				"ruby",
+				"typescript",
+				"javascript",
+				"tsx",
+				"json",
+				"yaml",
 			})
 		end,
 	},
